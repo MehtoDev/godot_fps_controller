@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://m50sdyv1ky1e"]
+
+[ext_resource type="PackedScene" uid="uid://cascdk6pthx0t" path="res://player.tscn" id="1_ptav2"]
+[ext_resource type="Script" path="res://world.gd" id="1_t4ukf"]
+[ext_resource type="PackedScene" uid="uid://bh7in0d32g3v5" path="res://level.tscn" id="2_edkxp"]
+
+[sub_resource type="Environment" id="Environment_pqo7v"]
+
+[node name="World" type="Node"]
+script = ExtResource("1_t4ukf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.830984, -0.36423, 0.420478, 0, 0.755853, 0.654741, -0.556296, 0.544079, -0.628102, 0, 0, 0)
+light_color = Color(1, 0.933333, 0.854902, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pqo7v")
+
+[node name="Player" parent="." instance=ExtResource("1_ptav2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.51406, 0)
+
+[node name="Level" parent="." instance=ExtResource("2_edkxp")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../Player")
